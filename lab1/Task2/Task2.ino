@@ -20,10 +20,10 @@ void setup() {     //this code runs once
 }
 
 void loop() {     //this code repeats in a loop  
-
-  if (prizm.readSonicSensorCM(3) > 20) {
-    prizm.setMotorPowers(20,20);   // turn Motors 1 and 2 on at 50% power
-  } else if (prizm.readSonicSensorCM(3) < 10) {
+  int currentPositionCM = prizm.readSonicSensorCM(3);
+  if (currentPositionCM > 20) {
+    prizm.setMotorPowers(20,20);  
+  } else if (currentPositionCM < 10) {
     prizm.setMotorPowers(-20,-20);
   } else {
     prizm.setMotorPowers(125,125);
