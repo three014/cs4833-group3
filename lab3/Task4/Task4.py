@@ -70,6 +70,8 @@ while True:
             
 
 color = ["none", "Black", "Blue", "Green", "Yellow", "Red", "White", "Brown"]
+isTurnedAround = False
+stopWhenFinished = False
 # now 
 while(True):
     # ack = cmdSend(ser, 4)
@@ -84,9 +86,22 @@ while(True):
 
     if color[color_num] == "Green":
         cmdSend(ser, 2)
+        if isTurnedAround:
+            stopWhenFinished = True
     if color[color_num] == "Black":
         cmdSend(ser, 3)
     if color[color_num] == "White":
         cmdSend(ser, 5)
+    if color[color_num] == "Yellow" or color_num[color_num] == "Red":
+        if not isTurnedAround: 
+            cmdSend(ser, 6)
+            time.sleep(1)
+            isTurnedAround = True
+        elif not stopWhenFinished:
+            cmdSend(ser, 7)
+        else:
+            cmdSend(ser, 5)
+
+
 
 

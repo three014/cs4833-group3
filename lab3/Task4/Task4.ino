@@ -80,29 +80,40 @@ void loop() {
 
       case 6:{
         outputString += "6";
-        prizm.setRedLED(LOW);
-        prizm.setGreenLED(HIGH);
-        
-        break;
+        prizm.setMotorPowers(10, -10);
+        delay(1000);
       }
 
       case 7:{
         outputString += "7";
-        prizm.setGreenLED(LOW);
-        prizm.setRedLED(HIGH);
-        break;
+        prizm.setMotorPowers(10, 10);
       }
 
-      case 8:{
-        outputString += "8";
-        prizm.setRedLED(LOW);
-        prizm.setGreenLED(HIGH);
-        delay(500);
-        prizm.setGreenLED(LOW);
-        prizm.setRedLED(HIGH);
-        delay(500);
-        break;
-      }
+      // case 6:{
+      //   outputString += "6";
+      //   prizm.setRedLED(LOW);
+      //   prizm.setGreenLED(HIGH);
+        
+      //   break;
+      // }
+
+      // case 7:{
+      //   outputString += "7";
+      //   prizm.setGreenLED(LOW);
+      //   prizm.setRedLED(HIGH);
+      //   break;
+      // }
+
+      // case 8:{
+      //   outputString += "8";
+      //   prizm.setRedLED(LOW);
+      //   prizm.setGreenLED(HIGH);
+      //   delay(500);
+      //   prizm.setGreenLED(LOW);
+      //   prizm.setRedLED(HIGH);
+      //   delay(500);
+      //   break;
+      // }
 
       
     }
