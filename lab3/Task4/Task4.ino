@@ -84,7 +84,7 @@ void loop() {
         break;
       }
 
-      go straight
+      // go straight
       case 7:{
         outputString += "7";
         prizm.setMotorPowers(10, 10);
