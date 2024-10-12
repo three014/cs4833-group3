@@ -49,72 +49,47 @@ void loop() {
     switch (cmd) {
       // echo
       case 1:{
-        outputString += "1";               // everytime we put the original cmd to our outputString, to tell Pi know we get the cmd
+        outputString += "1";               
         break;
       }
       // turn left
       case 2:{
-        outputString += "2";               // everytime we put the original cmd to our outputString, to tell Pi know we get the cmd
-        prizm.setMotorPowers(20,10);      // please note that here we hardcode the speed of the motor, you can adjust my code and transfer the speed value you want through the serial communication
+        outputString += "2";               
+        prizm.setMotorPowers(50,125);      
         break;
       }
       // turn right
       case 3:{
-        outputString += "3";               // everytime we put the original cmd to our outputString, to tell Pi know we get the cmd
-        prizm.setMotorPowers(10,20);      // please note that here we hardcode the speed of the motor, you can adjust my code and transfer the speed value you want through the serial communication
+        outputString += "3";               
+        prizm.setMotorPowers(125,50);      
         break;
       }
       // read sonic sensor connected to D3 on the controller
       case 4:{
-        outputString += "4";               // everytime we put the original cmd to our outputString, to tell Pi know we get the cmd
-        outputString += prizm.readSonicSensorCM(3); // please note that here we hardcode the port number of the sonic sensor, you can adjust the value to make it fits your robot
-                                           // also, here we append the distance to the outputString so that we can send back to Pi
+        outputString += "4";               
+        outputString += prizm.readSonicSensorCM(3); 
         break;
       }
       // break the motor
       case 5:{
-        outputString += "5";               // everytime we put the original cmd to our outputString, to tell Pi know we get the cmd
+        outputString += "5";               
         prizm.setMotorPowers(125,125);
         break;
       }
 
+      // turn around
       case 6:{
         outputString += "6";
-        prizm.setMotorPowers(10, -10);
-        delay(1000);
+        prizm.setMotorPowers(-20, 20);
+        break;
       }
 
+      go straight
       case 7:{
         outputString += "7";
         prizm.setMotorPowers(10, 10);
+        break;
       }
-
-      // case 6:{
-      //   outputString += "6";
-      //   prizm.setRedLED(LOW);
-      //   prizm.setGreenLED(HIGH);
-        
-      //   break;
-      // }
-
-      // case 7:{
-      //   outputString += "7";
-      //   prizm.setGreenLED(LOW);
-      //   prizm.setRedLED(HIGH);
-      //   break;
-      // }
-
-      // case 8:{
-      //   outputString += "8";
-      //   prizm.setRedLED(LOW);
-      //   prizm.setGreenLED(HIGH);
-      //   delay(500);
-      //   prizm.setGreenLED(LOW);
-      //   prizm.setRedLED(HIGH);
-      //   delay(500);
-      //   break;
-      // }
-
       
     }
     

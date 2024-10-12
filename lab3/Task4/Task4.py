@@ -70,8 +70,9 @@ while True:
             
 
 color = ["none", "Black", "Blue", "Green", "Yellow", "Red", "White", "Brown"]
-isTurnedAround = False
-stopWhenFinished = False
+started = False
+midPoint = False
+startColor = "none"
 # now 
 while(True):
     # ack = cmdSend(ser, 4)
@@ -84,23 +85,40 @@ while(True):
     except brickpi3.SensorError as error:
       print(error)
 
-    if color[color_num] == "Green":
-        cmdSend(ser, 2)
-        if isTurnedAround:
-            stopWhenFinished = True
-    if color[color_num] == "Black":
-        cmdSend(ser, 3)
-    if color[color_num] == "White":
-        cmdSend(ser, 5)
-    if color[color_num] == "Yellow" or color_num[color_num] == "Red":
-        if not isTurnedAround: 
+    if not started and (color[color_num] == "Blue" or color[color_num] == "Red"):
+        print("STARTED BLUE RED")
+        startColor = color[color_num]
+        cmdSend(ser, 7)
+
+    if started and (color[color_num] == "Blue" or color[color_num] == "Red"):
+        print("MIDPOINT BLUE RED")
+        if color[color_num] == startColor:
+            cmdSend(ser, 5)
+            print("FINAL BREAK")
+            break
+        else:
             cmdSend(ser, 6)
             time.sleep(1)
-            isTurnedAround = True
-        elif not stopWhenFinished:
-            cmdSend(ser, 7)
-        else:
-            cmdSend(ser, 5)
+            print("MIDPOINT")
+            midPoint = True
+
+    if color[color_num] == "Yellow":
+        cmdSend(ser, 2)
+        print("yellow")
+        if not started:
+            started = True
+            print("STARTED")
+        if midPoint:
+            midPoint = False
+            print("NOT AT MIDPOINT ANYMORE")
+
+    if not midPoint and color[color_num] == "Black":
+        cmdSend(ser, 3)
+        print("black")
+
+
+
+
 
 
 
