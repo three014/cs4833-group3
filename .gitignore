@@ -1,3 +1,6 @@
 # Completed labs
 *.zip
 .DS_Store
+
+# Compiled python files
+*.pyc
