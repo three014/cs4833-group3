@@ -40,10 +40,10 @@ def turnRight(power):
     cmdSend(ser, 5, power)
 
 def readSonicCM(port):
-    cmdSend(ser, 6, port)
+    return cmdSend(ser, 6, port)
 
 def readSonicIN(port):
-    cmdSend(ser, 7, port)
+    return cmdSend(ser, 7, port)
 
 # let user know what is the next step
 print("*** Press the GREEN button to start the robot ***")
