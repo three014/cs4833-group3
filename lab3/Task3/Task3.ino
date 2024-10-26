@@ -80,7 +80,7 @@ void loop() {
 
       case 6:{
         outputString += "6";
-        prizm.etRedLED(LOW);
+        prizm.setRedLED(LOW);
         prizm.setGreenLED(HIGH);
         
         break;
