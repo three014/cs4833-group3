@@ -6,7 +6,7 @@ initSerComm(9600)
 startTime = int(time.time())
 endTime = int(time.time())
 
-while endTime - startTime < 30:
+while endTime - startTime < 120:
   
   distance = int(readSonicCM(3)[1:])
 
@@ -15,11 +15,11 @@ while endTime - startTime < 30:
 
   distanceOne = distance
 
-  if distanceOne > 20:
+  if distanceOne > 5:
     moveForward(20)
     continue
   else:
-    while distance < distanceOne+20:
+    while distance < distanceOne+5:
       distance = int(readSonicCM(3)[1:])
       moveBack(20)
     
