@@ -85,6 +85,13 @@ void loop() {
         outputString += prizm.readSonicSensorIN(param); 
         break;
       }
+      
+       case 8:{
+        outputString += "8";               
+        prizm.setMotorPowers(125,125);
+        prizm.PrizmEnd();
+        break;
+      }
     }
     
     Serial.println(outputString);          // println helps us to send back msg with a '\n' at the end

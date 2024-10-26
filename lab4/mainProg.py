@@ -3,48 +3,39 @@ import random
 
 initSerComm(9600)
 
-# moveForward(20)
-# time.sleep(3)
-# moveBack(20)
-# time.sleep(3)
-# turnLeft(20)
-# time.sleep(3)
-# turnRight(20)
-# time.sleep(3)
-# readSonicCM(3)
-# time.sleep(3)
-# readSonicIN(3)
+startTime = int(time.time())
+endTime = int(time.time())
 
-startTime = time.time
+while endTime - startTime < 30:
+  
+  distance = int(readSonicCM(3)[1:])
 
-while time.time < startTime+120:
-
-  distance = readSonicCM(3)
-  print("First: "+distance)
-
-  if distance == "":
+  if distance == None:
     continue
 
-  distance = int(distance)
-  print("Second: "+distance)
+  distanceOne = distance
 
-  if distance > 5:
+  if distanceOne > 20:
     moveForward(20)
     continue
   else:
-    while distance < distance+5:
+    while distance < distanceOne+20:
+      distance = int(readSonicCM(3)[1:])
       moveBack(20)
     
-    
-    sleepTime = random.uniform(0.1, 3.5)
+    sleepTime = random.uniform(0.1, 2.5)
     choice = random.randint(1, 2)
 
-    if choice is 1:
+    if choice == 1:
       turnLeft(20)
       time.sleep(sleepTime)
-    elif choice is 2:
+    elif choice == 2:
       turnRight(20)
       time.sleep(sleepTime)
+
+    endTime = int(time.time())
+
+endProgram()
 
 
 
