@@ -49,6 +49,8 @@ void loop() {
       case 2:{
         outputString += "2";
         prizm.setMotorPowers(param, param);
+        prizm.setRedLED(LOW);
+        prizm.setGreenLED(HIGH);
         break;
       }
 
@@ -62,14 +64,18 @@ void loop() {
       // Turn Left
       case 4:{
         outputString += "4";               
-        prizm.setMotorPowers(125,param);      
+        prizm.setMotorPowers(-param,param);
+        prizm.setGreenLED(LOW);
+        prizm.setRedLED(HIGH);
         break;
       }
 
       // Turn Right
       case 5:{
         outputString += "5";               
-        prizm.setMotorPowers(param,125);      
+        prizm.setMotorPowers(param,-param); 
+        prizm.setGreenLED(LOW);
+        prizm.setRedLED(HIGH);     
         break;
       }
 
@@ -89,13 +95,19 @@ void loop() {
       case 8:{
         outputString += "8";               
         prizm.setMotorPowers(125,125);
+        prizm.setRedLED(LOW);
+        prizm.setGreenLED(HIGH);
+        delay(500);
+        prizm.setGreenLED(LOW);
+        prizm.setRedLED(HIGH); 
+        delay(500);
         break;
       }
 
       case 9:{
         outputString += "9";
-        prizm.PrismEnd();
-        break
+        prizm.PrizmEnd();
+        break;
       }
     }
     

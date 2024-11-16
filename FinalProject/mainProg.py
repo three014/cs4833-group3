@@ -6,35 +6,54 @@ initSerComm(9600)
 startTime = int(time.time())
 endTime = int(time.time())
 
-while endTime - startTime < 120:
+rightSleepTime = 1.2
+leftSleepTime = 1
+motorPower = 15
+
+currentColor = "none"
+
+
+while endTime - startTime < 180:
   
-  distance = int(readSonicCM(3)[1:])
+  moveForward(motorPower)
+  
+  tempColor = readColor()
 
-  if distance == None:
-    continue
+  if tempColor == "Blue":
+    break
+  
+  if (tempColor == "Red" and  currentColor != "Red") or (tempColor == "Yellow" and currentColor != "Yellow"):
+    currentColor = tempColor
+    print("New current color: " + currentColor)
+    motorPower = 7
+    time.sleep(.5)
+    motorPower = 15
+    rightSleepTime = 1.2
+    leftSleepTime = 1
+  elif tempColor == currentColor and currentColor != "none":
+    print("Moving Back")
+    moveBack(7)
+    time.sleep(.2)
+    print("Turning on color: " + currentColor + ", Sleep time: " + str(leftSleepTime))
+    turnLeft(motorPower)
+    time.sleep(leftSleepTime)
+    if (currentColor == "Yellow" or currentColor == "Red") and leftSleepTime < 3.0 :
+      leftSleepTime += (leftSleepTime * .1)
 
-  distanceOne = distance
+  distance = readSonicCM(3) 
+  if distance < 20:
+    print("Turning on distance: " + str(distance))
+    turnRight(motorPower)
+    time.sleep(rightSleepTime)
+    rightSleepTime += (rightSleepTime * .1)
 
-  if distanceOne > 5:
-    moveForward(20)
-    continue
-  else:
-    while distance < distanceOne+5:
-      distance = int(readSonicCM(3)[1:])
-      moveBack(20)
-    
-    sleepTime = random.uniform(0.1, 2.5)
-    choice = random.randint(1, 2)
+  #TODO: counters for when stuck on a corner
 
-    if choice == 1:
-      turnLeft(20)
-      time.sleep(sleepTime)
-    elif choice == 2:
-      turnRight(20)
-      time.sleep(sleepTime)
 
-    endTime = int(time.time())
 
+  endTime = int(time.time())
+
+stopMove()
 endProgram()
 
 

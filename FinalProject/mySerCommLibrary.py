@@ -58,24 +58,27 @@ def stopMove():
     cmdSend(ser, 8, None)
 
 def readSonicCM(port):
-    return cmdSend(ser, 6, port)
+    return int(cmdSend(ser, 6, port)[1:])
 
 def readSonicIN(port):
-    return cmdSend(ser, 7, port)
+    return int(cmdSend(ser, 7, port)[1:])
 
 def endProgram():
     cmdSend(ser, 9, None)
 
-def initColorSensor():
+def readColor():
     try:
         color_num = BP.get_sensor(BP.PORT_1)
+        return color[color_num]
     except brickpi3.SensorError as error:
         print(error)
+        return color[0]
 
-def initTouchSensor():
+def touchSensor():
     try:
         r1 = BP.get_sensor(BP.PORT_2)
     except brickpi3.SensorError as error:
         print(error)
         r1 = 0
+    return r1
 
